@@ -121,29 +121,29 @@ export function ReportDisplay({ report, coordinates, address, timestamp, label }
 
   return (
     <Card className="w-full bg-[#0a0a0a] border-white/10">
-      <CardHeader className="border-b border-white/10">
-        <div className="flex items-start justify-between">
-          <div className="space-y-2">
-            <CardTitle className="flex items-center gap-3 text-white">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center border border-white/20">
-                <FileText className="size-5 text-white" />
+      <CardHeader className="border-b border-white/10 p-4 sm:p-6">
+        <div className="flex items-start justify-between gap-2 sm:gap-4">
+          <div className="space-y-1.5 sm:space-y-2 min-w-0 flex-1">
+            <CardTitle className="flex items-start sm:items-center gap-2 sm:gap-3 text-white">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
+                <FileText className="size-4 sm:size-5 text-white" />
               </div>
-              <div>
-                <div className="text-xl font-bold">Informe de Análisis Geográfico</div>
-                <CardDescription className="flex items-center gap-2 mt-2 text-white/60">
-                  <MapPin className="size-3 text-white/60" />
-                  {address || `${coordinates.lat.toFixed(6)}, ${coordinates.lon.toFixed(6)}`}
+              <div className="min-w-0 flex-1">
+                <div className="text-base sm:text-lg md:text-xl font-bold line-clamp-2">Informe de Análisis Geográfico</div>
+                <CardDescription className="flex items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 text-white/60 text-xs sm:text-sm">
+                  <MapPin className="size-2.5 sm:size-3 text-white/60 flex-shrink-0" />
+                  <span className="truncate">{address || `${coordinates.lat.toFixed(6)}, ${coordinates.lon.toFixed(6)}`}</span>
                 </CardDescription>
-                <CardDescription className="flex items-center gap-2 text-white/50 text-xs">
-                  <Calendar className="size-3" />
-                  {formattedDate}
+                <CardDescription className="flex items-center gap-1.5 sm:gap-2 text-white/50 text-[10px] sm:text-xs">
+                  <Calendar className="size-2.5 sm:size-3 flex-shrink-0" />
+                  <span className="truncate">{formattedDate}</span>
                 </CardDescription>
               </div>
             </CardTitle>
           </div>
-          <div className="flex gap-2 items-start">
+          <div className="flex gap-1.5 sm:gap-2 items-start flex-shrink-0">
             {label && (
-              <Badge variant="outline" className="text-[10px] uppercase tracking-wide bg-white/10 text-white border-white/20">
+              <Badge variant="outline" className="text-[9px] sm:text-[10px] uppercase tracking-wide bg-white/10 text-white border-white/20 hidden sm:inline-flex">
                 {label}
               </Badge>
             )}
@@ -154,9 +154,9 @@ export function ReportDisplay({ report, coordinates, address, timestamp, label }
                     variant="outline" 
                     size="icon"
                     onClick={handleSaveLocation}
-                    className="border-white/20 hover:bg-white/10 hover:border-white/30"
+                    className="border-white/20 hover:bg-white/10 hover:border-white/30 h-8 w-8 sm:h-10 sm:w-10"
                   >
-                    <MapPin className="size-4 text-white/70" />
+                    <MapPin className="size-3.5 sm:size-4 text-white/70" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -172,9 +172,9 @@ export function ReportDisplay({ report, coordinates, address, timestamp, label }
                     variant="outline" 
                     size="icon"
                     onClick={handleExportPDF}
-                    className="border-white/20 hover:bg-white/10 hover:border-white/30"
+                    className="border-white/20 hover:bg-white/10 hover:border-white/30 h-8 w-8 sm:h-10 sm:w-10"
                   >
-                    <Download className="size-4 text-white/70" />
+                    <Download className="size-3.5 sm:size-4 text-white/70" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -186,46 +186,47 @@ export function ReportDisplay({ report, coordinates, address, timestamp, label }
         </div>
       </CardHeader>
       
-      <CardContent className="pt-6">
-        <div className="space-y-6">
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className="flex items-center gap-1 bg-white/5 text-white/70 border-white/10">
-              <Info className="size-3 text-white/60" />
-              OpenStreetMap
+      <CardContent className="pt-4 sm:pt-6 p-4 sm:p-6">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            <Badge variant="secondary" className="flex items-center gap-1 bg-white/5 text-white/70 border-white/10 text-[10px] sm:text-xs px-2 py-0.5">
+              <Info className="size-2.5 sm:size-3 text-white/60" />
+              <span className="hidden sm:inline">OpenStreetMap</span>
+              <span className="sm:hidden">OSM</span>
             </Badge>
-            <Badge variant="secondary" className="flex items-center gap-1 bg-white/5 text-white/70 border-white/10">
-              <Info className="size-3 text-white/60" />
-              Open-Elevation
+            <Badge variant="secondary" className="flex items-center gap-1 bg-white/5 text-white/70 border-white/10 text-[10px] sm:text-xs px-2 py-0.5">
+              <Info className="size-2.5 sm:size-3 text-white/60" />
+              Elevation
             </Badge>
-            <Badge variant="secondary" className="flex items-center gap-1 bg-white/5 text-white/70 border-white/10">
-              <Info className="size-3 text-white/60" />
-              Open-Meteo
+            <Badge variant="secondary" className="flex items-center gap-1 bg-white/5 text-white/70 border-white/10 text-[10px] sm:text-xs px-2 py-0.5">
+              <Info className="size-2.5 sm:size-3 text-white/60" />
+              Meteo
             </Badge>
-            <Badge variant="outline" className="flex items-center gap-1 bg-white/10 text-white border-white/20">
-              <Sparkles className="size-3" />
-              Análisis IA
+            <Badge variant="outline" className="flex items-center gap-1 bg-white/10 text-white border-white/20 text-[10px] sm:text-xs px-2 py-0.5">
+              <Sparkles className="size-2.5 sm:size-3" />
+              IA
             </Badge>
           </div>
 
           <Separator className="bg-white/10" />
 
-          <ScrollArea className="h-[400px] w-full rounded-lg border border-white/10 bg-[#0a0a0a] p-6">
+          <ScrollArea className="h-[300px] sm:h-[400px] md:h-[500px] w-full rounded-lg border border-white/10 bg-[#0a0a0a] p-4 sm:p-6">
             <div className="prose prose-sm max-w-none prose-invert">
-              <div className="whitespace-pre-wrap text-white/80 leading-relaxed">
+              <div className="whitespace-pre-wrap text-white/80 leading-relaxed text-sm sm:text-base">
                 {normalizedReport}
               </div>
             </div>
           </ScrollArea>
 
-          <div className="flex items-start gap-3 p-4 bg-white/5 border border-white/20 rounded-lg">
-            <AlertTriangle className="size-5 text-white/60 mt-0.5 flex-shrink-0" />
-            <p className="text-xs text-white/70 leading-relaxed">
+          <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-white/5 border border-white/20 rounded-lg">
+            <AlertTriangle className="size-4 sm:size-5 text-white/60 mt-0.5 flex-shrink-0" />
+            <p className="text-[10px] sm:text-xs text-white/70 leading-relaxed">
               <strong className="text-white">Limitaciones:</strong> Este informe se basa en datos públicos y puede no estar completamente actualizado. 
               Se recomienda verificar la información con fuentes oficiales locales antes de tomar decisiones importantes.
             </p>
           </div>
 
-          <div className="text-xs text-white/50 font-mono">
+          <div className="text-[10px] sm:text-xs text-white/50 font-mono break-all">
             <strong className="text-white/70">Coordenadas exactas:</strong> {coordinates.lat.toFixed(6)}° N, {coordinates.lon.toFixed(6)}° E
           </div>
         </div>

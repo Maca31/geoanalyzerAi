@@ -53,59 +53,61 @@ export function MapLayersControl({
         }`}
         onClick={() => isBase ? onBaseLayerChange(layer.id) : onOverlayToggle(layer.id)}
       >
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-start gap-3 flex-1">
-            <div className={`text-2xl p-2 rounded-lg ${
+        <div className="flex items-start justify-between gap-3 min-w-0">
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            <div className={`text-2xl p-2 rounded-lg flex-shrink-0 ${
               isActive ? 'bg-white/20' : 'bg-white/5'
             }`}>
               {layer.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <h4 className="font-semibold text-white text-sm">{layer.name}</h4>
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <h4 className="font-semibold text-white text-sm truncate">{layer.name}</h4>
                 {isActive && (
-                  <Badge variant="secondary" className="text-[10px] px-2 py-0 bg-white/20 text-white border-white/30">
+                  <Badge variant="secondary" className="text-[10px] px-2 py-0 bg-white/20 text-white border-white/30 flex-shrink-0">
                     Activa
                   </Badge>
                 )}
               </div>
-              <p className="text-xs text-white/50 leading-relaxed">
+              <p className="text-xs text-white/50 leading-relaxed break-words">
                 {layer.description}
               </p>
             </div>
           </div>
           
-          {isBase ? (
-            <Button
-              variant={isActive ? "default" : "outline"}
-              size="sm"
-              className={`${
-                isActive 
-                  ? 'bg-white text-black hover:bg-white/90 border-0' 
-                  : 'bg-white/5 border-white/20 text-white/70 hover:bg-white/10'
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                onBaseLayerChange(layer.id);
-              }}
-            >
-              {isActive ? 'Activo' : 'Usar'}
-            </Button>
-          ) : (
-            <div 
-              className={`w-10 h-6 rounded-full relative transition-all ${
-                isActive ? 'bg-white' : 'bg-white/20'
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                onOverlayToggle(layer.id);
-              }}
-            >
-              <div className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-black transition-transform ${
-                isActive ? 'translate-x-4' : 'translate-x-0'
-              }`} />
-            </div>
-          )}
+          <div className="flex-shrink-0">
+            {isBase ? (
+              <Button
+                variant={isActive ? "default" : "outline"}
+                size="sm"
+                className={`whitespace-nowrap ${
+                  isActive 
+                    ? 'bg-white text-black hover:bg-white/90 border-0' 
+                    : 'bg-white/5 border-white/20 text-white/70 hover:bg-white/10'
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onBaseLayerChange(layer.id);
+                }}
+              >
+                {isActive ? 'Activo' : 'Usar'}
+              </Button>
+            ) : (
+              <div 
+                className={`w-10 h-6 rounded-full relative transition-all flex-shrink-0 ${
+                  isActive ? 'bg-white' : 'bg-white/20'
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOverlayToggle(layer.id);
+                }}
+              >
+                <div className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-black transition-transform ${
+                  isActive ? 'translate-x-4' : 'translate-x-0'
+                }`} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -120,16 +122,16 @@ export function MapLayersControl({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="left" className="w-full sm:w-[500px] bg-black border-white/10 p-0">
-        <div className="flex flex-col h-full">
-          <SheetHeader className="px-6 pt-6 pb-4 border-b border-white/10">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center border border-white/20">
+      <SheetContent side="left" className="w-full sm:w-[500px] bg-black border-white/10 p-0 overflow-hidden flex flex-col">
+        <div className="flex flex-col h-full min-h-0">
+          <SheetHeader className="px-6 pt-6 pb-4 border-b border-white/10 flex-shrink-0">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
                   <Layers className="w-5 h-5 text-white" />
                 </div>
-                <div>
-                  <SheetTitle className="text-white text-xl font-bold">Capas del Mapa</SheetTitle>
+                <div className="min-w-0 flex-1">
+                  <SheetTitle className="text-white text-xl font-bold truncate">Capas del Mapa</SheetTitle>
                   <SheetDescription className="text-white/50 text-sm">
                     Personaliza la visualización
                   </SheetDescription>
@@ -139,7 +141,7 @@ export function MapLayersControl({
                 variant="ghost"
                 size="icon"
                 onClick={() => onOpenChange(false)}
-                className="text-white/60 hover:text-white hover:bg-white/10"
+                className="text-white/60 hover:text-white hover:bg-white/10 flex-shrink-0"
               >
                 <X className="w-5 h-5" />
               </Button>
@@ -147,8 +149,8 @@ export function MapLayersControl({
           </SheetHeader>
 
           {/* Tabs */}
-          <div className="px-6 pt-4 border-b border-white/10">
-            <div className="flex gap-2">
+          <div className="px-6 pt-4 pb-4 border-b border-white/10 flex-shrink-0 overflow-x-auto">
+            <div className="flex gap-2 min-w-max">
               {tabs.map(tab => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -156,13 +158,13 @@ export function MapLayersControl({
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
                       isActive
                         ? 'bg-white/10 text-white border border-white/20'
                         : 'text-white/60 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 flex-shrink-0" />
                     <span className="hidden sm:inline">{tab.label}</span>
                   </button>
                 );
@@ -171,22 +173,20 @@ export function MapLayersControl({
           </div>
 
           {/* Content */}
-          <ScrollArea className="flex-1 px-6 py-6">
-            <div className="space-y-4">
-              {activeTab === 'base' && (
-                <>
-                  <div className="mb-4">
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <ScrollArea className="h-full">
+              <div className="px-6 py-6 space-y-4">
+                {activeTab === 'base' && (
+                  <div>
                     <p className="text-xs text-white/50 font-medium mb-3">Selecciona el mapa base</p>
                     <div className="space-y-2">
                       {baseLayers.map(layer => renderLayerItem(layer, true))}
                     </div>
                   </div>
-                </>
-              )}
+                )}
 
-              {activeTab === 'weather' && (
-                <>
-                  <div className="mb-4">
+                {activeTab === 'weather' && (
+                  <div>
                     <p className="text-xs text-white/50 font-medium mb-3">Datos meteorológicos en tiempo real</p>
                     {weatherLayers.length > 0 ? (
                       <div className="space-y-2">
@@ -199,12 +199,10 @@ export function MapLayersControl({
                       </div>
                     )}
                   </div>
-                </>
-              )}
+                )}
 
-              {activeTab === 'terrain' && (
-                <>
-                  <div className="mb-4">
+                {activeTab === 'terrain' && (
+                  <div>
                     <p className="text-xs text-white/50 font-medium mb-3">Información topográfica y relieve</p>
                     {MAP_LAYERS.filter(l => l.id === 'terrain').map(layer => 
                       renderLayerItem(layer, true)
@@ -220,21 +218,19 @@ export function MapLayersControl({
                       </div>
                     )}
                   </div>
-                </>
-              )}
+                )}
 
-              {activeTab === 'data' && (
-                <>
-                  <div className="mb-4">
+                {activeTab === 'data' && (
+                  <div>
                     <p className="text-xs text-white/50 font-medium mb-3">Capas de riesgo generadas automáticamente</p>
                     <div className="space-y-2">
                       {riskLayers.map(layer => renderLayerItem(layer, false))}
                     </div>
                   </div>
-                </>
-              )}
-            </div>
-          </ScrollArea>
+                )}
+              </div>
+            </ScrollArea>
+          </div>
         </div>
       </SheetContent>
     </Sheet>

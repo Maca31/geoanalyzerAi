@@ -173,18 +173,25 @@ export function MapView({
         html: `
           <div style="
             position: relative;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
           ">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#ffffff"/>
-              <circle cx="12" cy="9" r="2" fill="#000000"/>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer shadow circle -->
+              <circle cx="12" cy="12" r="11" fill="#000000" opacity="0.3"/>
+              <!-- Main pin shape with vibrant red -->
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EF4444" stroke="#FFFFFF" stroke-width="1.5"/>
+              <!-- Inner white circle for contrast -->
+              <circle cx="12" cy="9" r="3.5" fill="#FFFFFF" stroke="#EF4444" stroke-width="1"/>
+              <!-- Center dot -->
+              <circle cx="12" cy="9" r="1.5" fill="#EF4444"/>
             </svg>
           </div>
         `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40]
       });
 
       markerRef.current = L.marker([marker.lat, marker.lon], {
@@ -192,17 +199,48 @@ export function MapView({
       }).addTo(mapRef.current);
 
       markerRef.current.bindPopup(`
-        <div style="font-family: system-ui; padding: 6px; max-width: 250px;">
-          <strong>📍 Ubicación seleccionada</strong><br/>
-          <small>Lat: ${marker.lat.toFixed(6)}<br/>
-          Lon: ${marker.lon.toFixed(6)}</small>
+        <div style="
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          padding: 10px 12px;
+          max-width: 280px;
+          background: rgba(0, 0, 0, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        ">
+          <div style="
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+          ">
+            <span style="font-size: 16px;">📍</span>
+            <strong style="
+              color: #ffffff;
+              font-size: 13px;
+              font-weight: 500;
+              letter-spacing: -0.01em;
+            ">Ubicación seleccionada</strong>
+          </div>
+          <div style="
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+          ">
+            Lat: ${marker.lat.toFixed(6)}<br/>
+            Lon: ${marker.lon.toFixed(6)}
+          </div>
         </div>
       `, {
-        maxWidth: 280,
-        offset: [0, -25],
+        maxWidth: 300,
+        offset: [0, -30],
         autoPan: true,
         autoPanPadding: [80, 80],
         closeOnClick: false,
+        className: 'custom-popup'
       }).openPopup();
     }
   }, [marker]);

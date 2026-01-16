@@ -81,16 +81,16 @@ export function SearchBar({ onSearch, loading }: SearchBarProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3 w-full relative">
-      <div className="relative flex-1">
-        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-white/60 pointer-events-none" />
+    <form onSubmit={handleSubmit} className="flex gap-2 sm:gap-3 w-full relative">
+      <div className="relative flex-1 min-w-0">
+        <MapPin className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 size-3.5 sm:size-4 text-white/60 pointer-events-none" />
         <Input
           type="text"
-          placeholder="Introduce una dirección (ej: Plaza Mayor, Madrid)"
+          placeholder="Introduce una dirección..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           disabled={loading}
-          className="pl-12 bg-[#0a0a0a] border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:ring-white/20 h-12"
+          className="pl-9 sm:pl-12 bg-[#0a0a0a] border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:ring-white/20 h-10 sm:h-12 text-sm sm:text-base"
           autoComplete="off"
         />
 
@@ -121,17 +121,18 @@ export function SearchBar({ onSearch, loading }: SearchBarProps) {
         type="submit" 
         disabled={loading} 
         size="default"
-        className="h-12 bg-white text-black hover:bg-white/90 font-semibold px-6 shadow-lg"
+        className="h-10 sm:h-12 bg-white text-black hover:bg-white/90 font-semibold px-3 sm:px-4 md:px-6 shadow-lg text-sm sm:text-base flex-shrink-0"
       >
         {loading ? (
           <>
-            <Loader2 className="size-4 mr-2 animate-spin" />
-            Buscando...
+            <Loader2 className="size-3.5 sm:size-4 mr-1.5 sm:mr-2 animate-spin" />
+            <span className="hidden sm:inline">Buscando...</span>
+            <span className="sm:hidden">...</span>
           </>
         ) : (
           <>
-            <Search className="size-4 mr-2" />
-            Buscar
+            <Search className="size-3.5 sm:size-4 mr-1.5 sm:mr-2" />
+            <span className="hidden sm:inline">Buscar</span>
           </>
         )}
       </Button>

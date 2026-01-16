@@ -189,49 +189,50 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
       </div>
 
-      {/* Floating Top Bar */}
-      <header className="relative z-50 mt-4 mx-4">
-        <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 px-6 py-4">
-          <div className="flex items-center justify-between">
+      {/* Floating Top Bar - Responsive */}
+      <header className="relative z-50 mt-2 sm:mt-4 mx-2 sm:mx-4">
+        <div className="bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             <div 
-              className="flex items-center gap-3 cursor-pointer group"
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer group flex-shrink-0"
               onClick={() => setShowLanding(true)}
             >
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center group-hover:scale-105 transition-transform shadow-lg">
-                <Globe className="w-6 h-6 text-black" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white flex items-center justify-center group-hover:scale-105 transition-transform shadow-lg flex-shrink-0">
+                <Globe className="w-4 h-4 sm:w-6 sm:h-6 text-black" />
               </div>
-              <div>
-                <h1 className="text-lg font-bold text-white">GeoAnalyzer AI</h1>
-                <p className="text-xs text-white/50">Intelligence Platform</p>
+              <div className="min-w-0">
+                <h1 className="text-sm sm:text-base md:text-lg font-bold text-white truncate">GeoAnalyzer AI</h1>
+                <p className="text-[10px] sm:text-xs text-white/50 hidden xs:block">Intelligence Platform</p>
               </div>
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setLayersSheetOpen(true)}
-                className="hidden sm:flex text-white/70 hover:text-white hover:bg-white/10 border border-white/10 rounded-xl"
+                className="hidden md:flex text-white/70 hover:text-white hover:bg-white/10 border border-white/10 rounded-lg sm:rounded-xl text-xs sm:text-sm px-2 sm:px-3"
               >
-                <Layers className="w-4 h-4 mr-2" />
-                Capas
+                <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+                <span className="hidden lg:inline">Capas</span>
               </Button>
               
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSavedLocationsSheetOpen(true)}
-                className="hidden sm:flex text-white/70 hover:text-white hover:bg-white/10 border border-white/10 rounded-xl"
+                className="hidden md:flex text-white/70 hover:text-white hover:bg-white/10 border border-white/10 rounded-lg sm:rounded-xl text-xs sm:text-sm px-2 sm:px-3"
               >
-                <History className="w-4 h-4 mr-2" />
-                Historial
+                <History className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+                <span className="hidden lg:inline">Historial</span>
               </Button>
 
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="sm:hidden text-white/70 hover:text-white hover:bg-white/10 rounded-xl"
+                className="md:hidden text-white/70 hover:text-white hover:bg-white/10 rounded-lg p-2"
+                aria-label="Menú"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </Button>
@@ -240,7 +241,7 @@ function App() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="sm:hidden mt-4 pt-4 border-t border-white/10 space-y-2">
+            <div className="md:hidden mt-3 pt-3 border-t border-white/10 space-y-2 animate-slideDown">
               <Button
                 variant="ghost"
                 size="sm"
@@ -248,7 +249,7 @@ function App() {
                   setLayersSheetOpen(true);
                   setMobileMenuOpen(false);
                 }}
-                className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10 rounded-xl"
+                className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10 rounded-lg text-sm"
               >
                 <Layers className="w-4 h-4 mr-2" />
                 Capas del Mapa
@@ -261,7 +262,7 @@ function App() {
                   setSavedLocationsSheetOpen(true);
                   setMobileMenuOpen(false);
                 }}
-                className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10 rounded-xl"
+                className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10 rounded-lg text-sm"
               >
                 <History className="w-4 h-4 mr-2" />
                 Ubicaciones Guardadas
@@ -271,39 +272,36 @@ function App() {
         </div>
       </header>
 
-      {/* Floating Search Panel - Top Left */}
-      <div className="relative z-40 mt-6 mx-4">
-        <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 p-4 max-w-md">
-          <div className="flex items-center gap-2 mb-3">
-            <Search className="w-4 h-4 text-white/60" />
-            <h3 className="text-sm font-semibold text-white/80">Buscar Ubicación</h3>
+      {/* Floating Search Panel - Responsive */}
+      <div className="relative z-40 mt-3 sm:mt-4 md:mt-6 mx-2 sm:mx-4">
+        <div className="bg-black/90 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/5 shadow-2xl p-4 sm:p-5 max-w-full sm:max-w-md">
+          <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+              <Search className="w-4 h-4 text-white/50" />
+            </div>
+            <h3 className="text-sm sm:text-base font-medium text-white tracking-tight">Buscar Ubicación</h3>
           </div>
           <SearchBar onSearch={handleSearch} loading={searching} />
         </div>
       </div>
 
-      {/* Floating Coordinates - Top Right */}
+      {/* Floating Coordinates - Responsive */}
       {marker && (
-        <div className="fixed top-24 right-4 z-40 bg-black/80 backdrop-blur-xl rounded-xl border border-white/10 px-4 py-2 pointer-events-none">
-          <p className="text-xs font-mono text-white">
-            {marker.lat.toFixed(6)}, {marker.lon.toFixed(6)}
+        <div className="fixed top-20 sm:top-24 right-2 sm:right-4 z-40 bg-black/80 backdrop-blur-xl rounded-lg sm:rounded-xl border border-white/10 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 pointer-events-none">
+          <p className="text-[10px] sm:text-xs font-mono text-white">
+            <span className="hidden sm:inline">{marker.lat.toFixed(6)}, {marker.lon.toFixed(6)}</span>
+            <span className="sm:hidden">{marker.lat.toFixed(4)}...{marker.lon.toFixed(4)}</span>
           </p>
         </div>
       )}
 
-      {/* Floating Analysis Panel - Bottom Right */}
-      <div className="fixed bottom-4 right-4 z-40 w-full max-w-lg">
-        <div className="bg-black/90 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-          {loading && (
-            <div className="p-6">
-              <LoadingAnalysis />
-            </div>
-          )}
-          
-          {!loading && (analysisResult || comparisonResult) && (
-            <div className="max-h-[70vh] overflow-y-auto">
+      {/* Floating Analysis Panel - Responsive with Mobile Sheet */}
+      {!loading && (analysisResult || comparisonResult) ? (
+        <div className="fixed bottom-0 right-0 left-0 sm:left-auto sm:bottom-4 sm:right-4 z-40 w-full sm:w-auto sm:max-w-lg lg:max-w-xl">
+          <div className="bg-black/95 sm:bg-black/90 backdrop-blur-xl rounded-t-2xl sm:rounded-2xl border-t sm:border border-white/10 overflow-hidden shadow-2xl max-h-[85vh] sm:max-h-[80vh] flex flex-col">
+            <div className="overflow-y-auto flex-1">
               {analysisResult && (
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <ReportDisplay
                     report={analysisResult.report}
                     coordinates={analysisResult.coordinates}
@@ -317,9 +315,9 @@ function App() {
               {comparisonResult && analysisResult && (
                 <>
                   <Separator className="bg-white/10" />
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <div className="mb-4">
-                      <p className="text-sm font-semibold text-white/60 uppercase tracking-wider">
+                      <p className="text-xs sm:text-sm font-semibold text-white/60 uppercase tracking-wider">
                         Comparación
                       </p>
                     </div>
@@ -334,42 +332,48 @@ function App() {
                 </>
               )}
             </div>
-          )}
-
-          {!loading && !analysisResult && !comparisonResult && (
-            <div className="p-12 text-center">
-              <div className="space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-white/10 flex items-center justify-center border border-white/20">
-                  <MapPin className="w-8 h-8 text-white/40" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">Listo para analizar</h3>
-                  <p className="text-sm text-white/60">
-                    Busca una ubicación o haz clic en el mapa para comenzar
-                  </p>
-                </div>
+          </div>
+        </div>
+      ) : loading ? (
+        <div className="fixed bottom-4 right-4 z-40 w-full sm:w-auto sm:max-w-md">
+          <div className="bg-black/90 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-2xl p-4 sm:p-6">
+            <LoadingAnalysis />
+          </div>
+        </div>
+      ) : (
+        <div className="fixed bottom-4 right-4 z-40 w-full sm:w-auto sm:max-w-sm hidden sm:block">
+          <div className="bg-black/90 backdrop-blur-xl rounded-2xl border border-white/5 overflow-hidden shadow-2xl p-8 sm:p-10 md:p-12 text-center">
+            <div className="space-y-4 sm:space-y-5">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-2xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center shadow-lg">
+                <MapPin className="w-7 h-7 sm:w-8 sm:h-8 text-white/50" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-lg sm:text-xl font-medium text-white tracking-tight">Listo para analizar</h3>
+                <p className="text-xs sm:text-sm text-white/40 font-light leading-relaxed">
+                  Busca una ubicación o haz clic en el mapa para comenzar
+                </p>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Floating Info Panel - Bottom Left */}
+      {/* Floating Info Panel - Bottom Left - Responsive */}
       {!loading && !analysisResult && (
-        <div className="fixed bottom-4 left-4 z-40 w-full max-w-sm hidden lg:block">
-          <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden">
+        <div className="fixed bottom-4 left-2 sm:left-4 z-30 w-full sm:w-auto sm:max-w-xs md:max-w-sm hidden md:block">
+          <div className="bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 overflow-hidden max-h-[60vh] overflow-y-auto">
             <WelcomePanel />
           </div>
         </div>
       )}
 
-      {/* Risk Legend - Floating */}
+      {/* Risk Legend - Floating - Responsive */}
       {activeOverlays.filter(id => {
         const layer = getLayerById(id);
         return layer?.category === 'risk';
       }).length > 0 && riskData && (
-        <div className="fixed top-32 left-4 z-40 w-full max-w-xs hidden md:block">
-          <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 p-4">
+        <div className="fixed top-28 sm:top-32 left-2 sm:left-4 z-30 w-full sm:w-auto sm:max-w-xs hidden lg:block">
+          <div className="bg-black/80 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 p-3 sm:p-4">
             <RiskLegend 
               activeRiskLayers={activeOverlays.filter(id => {
                 const layer = getLayerById(id);
@@ -384,16 +388,16 @@ function App() {
       {/* Weather Legend */}
       <WeatherLegend activeOverlays={activeOverlays} />
 
-      {/* Saved Locations Sheet */}
+      {/* Saved Locations Sheet - Responsive */}
       <Sheet open={savedLocationsSheetOpen} onOpenChange={setSavedLocationsSheetOpen}>
-        <SheetContent side="right" className="w-full sm:w-[400px] bg-black border-white/10">
+        <SheetContent side="right" className="w-full sm:w-[400px] md:w-[450px] bg-black border-white/10 p-4 sm:p-6">
           <SheetHeader>
-            <SheetTitle className="text-white">Ubicaciones Guardadas</SheetTitle>
-            <SheetDescription className="text-white/50">
+            <SheetTitle className="text-white text-lg sm:text-xl">Ubicaciones Guardadas</SheetTitle>
+            <SheetDescription className="text-white/50 text-sm">
               Accede rápidamente a ubicaciones previamente analizadas
             </SheetDescription>
           </SheetHeader>
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <SavedLocations 
               onSelectLocation={async (lat, lon, address) => {
                 setMapCenter([lat, lon]);

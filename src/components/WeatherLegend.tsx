@@ -82,26 +82,26 @@ export function WeatherLegend({ activeOverlays }: WeatherLegendProps) {
   if (weatherOverlays.length === 0) return null;
 
   return (
-    <div className="absolute bottom-4 right-4 z-[400] space-y-2 max-w-[200px] pointer-events-none">
+    <div className="fixed bottom-16 sm:bottom-20 md:bottom-4 right-2 sm:right-4 z-30 space-y-2 max-w-[160px] sm:max-w-[180px] md:max-w-[200px] pointer-events-none hidden lg:block">
       {weatherOverlays.map(overlay => {
         const legend = legends[overlay];
         if (!legend) return null;
 
         return (
           <Card key={overlay} className="shadow-lg bg-black/95 backdrop-blur border-white/20 pointer-events-auto">
-            <CardContent className="p-3">
-              <div className="flex items-center gap-1.5 mb-2">
+            <CardContent className="p-2 sm:p-3">
+              <div className="flex items-center gap-1.5 mb-1.5 sm:mb-2">
                 <div className="text-white">{legend.icon}</div>
-                <span className="font-medium text-xs text-white">{legend.title}</span>
-                <Badge variant="secondary" className="ml-auto text-[10px] px-1 py-0 bg-white/10 text-white border-white/20">
+                <span className="font-medium text-[10px] sm:text-xs text-white truncate">{legend.title}</span>
+                <Badge variant="secondary" className="ml-auto text-[9px] sm:text-[10px] px-1 py-0 bg-white/10 text-white border-white/20 flex-shrink-0">
                   Activa
                 </Badge>
               </div>
               <div className="space-y-0.5">
                 {legend.colors.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-1.5 text-[10px]">
+                  <div key={idx} className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px]">
                     <div 
-                      className="size-3 rounded border border-white/20 flex-shrink-0"
+                      className="size-2.5 sm:size-3 rounded border border-white/20 flex-shrink-0"
                       style={{ 
                         backgroundColor: item.color,
                         border: item.color === 'transparent' ? '1px dashed rgba(255,255,255,0.3)' : undefined
