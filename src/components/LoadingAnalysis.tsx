@@ -1,4 +1,3 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Skeleton } from './ui/skeleton';
 import { Loader2, Database, Map, AlertTriangle } from 'lucide-react';
 import { Progress } from './ui/progress';
@@ -46,51 +45,57 @@ export function LoadingAnalysis() {
   const CurrentIcon = steps[currentStep].icon;
 
   return (
-    <Card className="w-full bg-[#0a0a0a] border-white/10">
-      <CardHeader className="border-b border-white/10">
-        <CardTitle className="flex items-center gap-3 text-white">
-          <Loader2 className="size-5 animate-spin text-white" />
-          Analizando ubicación...
-        </CardTitle>
-        <CardDescription className="text-white/50">
+    <div className="w-full">
+      {/* Header */}
+      <div className="px-4 py-3 sm:px-5 sm:py-4 border-b border-white/10">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Loader2 className="size-4 sm:size-5 animate-spin text-white" />
+          <h3 className="text-sm sm:text-base font-semibold text-white">Analizando ubicación...</h3>
+        </div>
+        <p className="text-xs sm:text-sm text-white/50 mt-1 ml-6 sm:ml-8">
           Recopilando información de fuentes oficiales
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6 pt-6">
-        <div className="space-y-2">
-          <Progress value={progress} className="h-2 bg-white/10" />
-          <p className="text-sm text-white/60 text-center">
+        </p>
+      </div>
+      
+      {/* Content */}
+      <div className="px-4 py-4 sm:px-5 sm:py-5 space-y-4 sm:space-y-5">
+        {/* Progress */}
+        <div className="space-y-1.5 sm:space-y-2">
+          <Progress value={progress} className="h-1.5 sm:h-2 bg-white/10" />
+          <p className="text-xs sm:text-sm text-white/60 text-center">
             {progress}% completado
           </p>
         </div>
 
-        <div className="flex items-center gap-3 p-4 bg-white/5 rounded-lg border border-white/10">
-          <CurrentIcon className={`size-5 text-white ${currentStep === steps.length - 1 ? 'animate-spin' : ''}`} />
-          <span className="text-sm font-medium text-white">{steps[currentStep].label}</span>
+        {/* Current Step */}
+        <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white/5 rounded-lg border border-white/10">
+          <CurrentIcon className={`size-4 sm:size-5 text-white flex-shrink-0 ${currentStep === steps.length - 1 ? 'animate-spin' : ''}`} />
+          <span className="text-xs sm:text-sm font-medium text-white">{steps[currentStep].label}</span>
         </div>
 
-        <div className="space-y-4">
-          <Skeleton className="h-8 w-3/4 bg-white/10" />
-          <Skeleton className="h-4 w-full bg-white/10" />
-          <Skeleton className="h-4 w-full bg-white/10" />
-          <Skeleton className="h-4 w-5/6 bg-white/10" />
-          <div className="pt-4 space-y-3">
-            <Skeleton className="h-20 w-full bg-white/10" />
-            <Skeleton className="h-20 w-full bg-white/10" />
-            <Skeleton className="h-20 w-full bg-white/10" />
+        {/* Skeletons - More compact on mobile */}
+        <div className="space-y-3 sm:space-y-4">
+          <Skeleton className="h-6 sm:h-8 w-3/4 bg-white/10" />
+          <Skeleton className="h-3 sm:h-4 w-full bg-white/10" />
+          <Skeleton className="h-3 sm:h-4 w-full bg-white/10" />
+          <Skeleton className="h-3 sm:h-4 w-5/6 bg-white/10" />
+          <div className="pt-3 sm:pt-4 space-y-2 sm:space-y-3">
+            <Skeleton className="h-14 sm:h-16 w-full bg-white/10" />
+            <Skeleton className="h-14 sm:h-16 w-full bg-white/10" />
           </div>
         </div>
 
-        <div className="text-xs text-white/50 space-y-1 pt-4 border-t border-white/10">
+        {/* Sources - Collapsible on very small screens */}
+        <div className="text-[10px] sm:text-xs text-white/50 space-y-1 pt-3 sm:pt-4 border-t border-white/10">
           <p className="font-medium text-white/70">Consultando fuentes:</p>
-          <ul className="list-disc list-inside space-y-0.5">
-            <li>OpenStreetMap - Datos geográficos</li>
-            <li>Overpass API - Infraestructura urbana</li>
-            <li>Open-Elevation - Datos topográficos</li>
-            <li>Open-Meteo - Información climática</li>
+          <ul className="list-disc list-inside space-y-0.5 text-white/40">
+            <li className="truncate">OpenStreetMap - Datos geográficos</li>
+            <li className="truncate">Overpass API - Infraestructura urbana</li>
+            <li className="truncate hidden sm:list-item">Open-Elevation - Datos topográficos</li>
+            <li className="truncate hidden sm:list-item">Open-Meteo - Información climática</li>
           </ul>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

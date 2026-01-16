@@ -353,8 +353,8 @@ function App() {
           </div>
         </div>
       ) : loading ? (
-        <div className="fixed bottom-4 right-4 z-40 w-full sm:w-auto sm:max-w-xs">
-          <div className="bg-black/90 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-2xl p-3 sm:p-4">
+        <div className="fixed bottom-0 right-0 left-0 sm:left-auto sm:bottom-4 sm:right-4 z-40 w-full sm:w-auto sm:max-w-sm md:max-w-md">
+          <div className="bg-black/95 sm:bg-black/90 backdrop-blur-xl rounded-t-2xl sm:rounded-2xl border-t sm:border border-white/10 overflow-hidden shadow-2xl max-h-[70vh] sm:max-h-[60vh] overflow-y-auto">
             <LoadingAnalysis />
           </div>
         </div>
